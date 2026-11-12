@@ -1,0 +1,47 @@
+package pages
+
+import (
+	"github.com/Rhyred/rhyred-homepage/internal/models"
+	"github.com/Rhyred/rhyred-homepage/web/templates/layouts"
+)
+
+templ Journal(entries []models.JournalEntry) {
+	@layouts.Base("Journal") {
+		<section class="page-hero">
+			<div class="page-hero__container">
+				<span class="section__label">Writing</span>
+				<h1 class="page-hero__title">Journal</h1>
+				<p class="page-hero__subtitle">Articles, experiment notes, documentation, and research reflections.</p>
+			</div>
+		</section>
+
+		<section class="section journal-section">
+			<div class="section__container">
+				if len(entries) == 0 {
+					<div class="journal-section__empty">
+						<p>No entries yet. Check back soon.</p>
+					</div>
+				} else {
+					<div class="journal-section__grid">
+						for _, entry := range entries {
+							<article class="journal-card journal-card--full" id={ entry.Slug }>
+								if entry.IsSample {
+									<span class="journal-card__sample-badge">Sample</span>
+								}
+								<div class="journal-card__meta">
+									<span class="journal-card__category">{ entry.Category }</span>
+									<span class="journal-card__date">{ entry.Date }</span>
+								</div>
+								<h2 class="journal-card__title">
+									{ entry.Title }
+								</h2>
+								<p class="journal-card__summary">{ entry.Summary }</p>
+							</article>
+						}
+					</div>
+				}
+			</div>
+		</section>
+	}
+}
+

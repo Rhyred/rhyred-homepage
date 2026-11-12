@@ -1,0 +1,317 @@
+package components
+
+import "github.com/Rhyred/rhyred-homepage/internal/models"
+
+templ Footer() {
+	<footer class="footer" id="contact">
+		<div class="footer__container">
+			<div class="footer__grid">
+				<div class="footer__brand-section">
+					<a href="/" class="footer__brand">
+						RHYRED<span class="footer__brand-dot">.</span>
+					</a>
+					<p class="footer__tagline">Building ideas into digital reality.</p>
+				</div>
+				<div class="footer__nav-section">
+					<h4 class="footer__heading">Navigation</h4>
+					<ul class="footer__list">
+						<li><a href="/" class="footer__link">Home</a></li>
+						<li><a href="/about" class="footer__link">About</a></li>
+						<li><a href="/projects" class="footer__link">Projects</a></li>
+						<li><a href="/lab" class="footer__link">Digital Lab</a></li>
+						<li><a href="/journal" class="footer__link">Journal</a></li>
+					</ul>
+				</div>
+				<div class="footer__connect-section">
+					<h4 class="footer__heading">Connect</h4>
+					<ul class="footer__list">
+						<li>
+							<a href="https://github.com/Rhyred" class="footer__link" target="_blank" rel="noopener noreferrer">
+								GitHub ↗
+							</a>
+						</li>
+						<li>
+							<a href="mailto:your-email@example.com" class="footer__link">
+								Email
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="footer__bottom">
+				<p class="footer__copyright">© 2026 RHYRED. Built with Go. Powered by curiosity.</p>
+			</div>
+		</div>
+	</footer>
+}
+
+templ Hero(profile models.Profile) {
+	<section class="hero">
+		<div class="hero__container">
+			<div class="hero__content">
+				<div class="hero__badges">
+					for _, role := range profile.Roles {
+						<span class="hero__badge">{ role }</span>
+					}
+				</div>
+				<h1 class="hero__title">
+					{ profile.Tagline }
+				</h1>
+				<p class="hero__description">
+					{ profile.Description }
+				</p>
+				<div class="hero__actions">
+					<a href="/projects" class="btn btn--primary">Explore Projects</a>
+					<a href="/about" class="btn btn--outline">About Me</a>
+				</div>
+			</div>
+			<div class="hero__terminal">
+				<div class="terminal">
+					<div class="terminal__header">
+						<span class="terminal__dot terminal__dot--red"></span>
+						<span class="terminal__dot terminal__dot--yellow"></span>
+						<span class="terminal__dot terminal__dot--green"></span>
+						<span class="terminal__title">root@rhyred:~</span>
+					</div>
+					<div class="terminal__body">
+						<div class="terminal__line">
+							<span class="terminal__prompt">root@rhyred:~$</span>
+							<span class="terminal__command"> whoami</span>
+						</div>
+						<div class="terminal__output">
+							<p>developer</p>
+							<p>engineer</p>
+							<p>research enthusiast</p>
+							<p>lifelong learner</p>
+						</div>
+						<div class="terminal__line">
+							<span class="terminal__prompt">root@rhyred:~$</span>
+							<span class="terminal__cursor">_</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+}
+
+templ ProjectCard(project models.Project) {
+	<article class="project-card">
+		<div class="project-card__header">
+			<span class="project-card__category">{ project.Category }</span>
+			<span class={ "project-card__status", StatusClass(project.Status) }>{ project.Status }</span>
+		</div>
+		<h3 class="project-card__title">
+			<a href={ templ.SafeURL("/projects/" + project.Slug) }>{ project.Title }</a>
+		</h3>
+		<p class="project-card__description">{ project.Description }</p>
+		<div class="project-card__tags">
+			for _, tag := range project.Tags {
+				<span class="project-card__tag">{ tag }</span>
+			}
+		</div>
+		<a href={ templ.SafeURL("/projects/" + project.Slug) } class="project-card__link">
+			View Details →
+		</a>
+	</article>
+}
+
+func StatusClass(status string) string {
+	switch status {
+	case "In Development":
+		return "project-card__status--active"
+	case "Research":
+		return "project-card__status--research"
+	case "Concept":
+		return "project-card__status--concept"
+	default:
+		return ""
+	}
+}
+
+templ ProjectGrid(projects []models.Project) {
+	<div class="project-grid" id="project-grid">
+		for _, project := range projects {
+			@ProjectCard(project)
+		}
+	</div>
+}
+
+templ FeaturedProjects(projects []models.Project) {
+	<section class="section featured-projects">
+		<div class="section__container">
+			<div class="section__header">
+				<span class="section__label">Featured Work</span>
+				<h2 class="section__title">Projects</h2>
+				<p class="section__subtitle">Selected projects across software engineering, AI, networking, and IoT.</p>
+			</div>
+			@ProjectGrid(projects)
+			<div class="section__action">
+				<a href="/projects" class="btn btn--outline">View All Projects</a>
+			</div>
+		</div>
+	</section>
+}
+
+templ AboutPreview(profile models.Profile) {
+	<section class="section about-preview">
+		<div class="section__container">
+			<div class="about-preview__grid">
+				<div class="about-preview__content">
+					<span class="section__label">About</span>
+					<h2 class="section__title">{ profile.About.Headline }</h2>
+					<p class="about-preview__text">{ profile.About.Summary }</p>
+					<div class="about-preview__details">
+						<div class="about-preview__detail">
+							<span class="about-preview__detail-label">Current Focus</span>
+							<span class="about-preview__detail-value">{ profile.About.CurrentFocus }</span>
+						</div>
+						<div class="about-preview__detail">
+							<span class="about-preview__detail-label">Background</span>
+							<span class="about-preview__detail-value">{ profile.About.Background }</span>
+						</div>
+					</div>
+					<a href="/about" class="btn btn--outline">Read More</a>
+				</div>
+				<div class="about-preview__visual">
+					<div class="terminal terminal--compact">
+						<div class="terminal__header">
+							<span class="terminal__dot terminal__dot--red"></span>
+							<span class="terminal__dot terminal__dot--yellow"></span>
+							<span class="terminal__dot terminal__dot--green"></span>
+							<span class="terminal__title">profile.json</span>
+						</div>
+						<div class="terminal__body terminal__body--code">
+							<pre><code>&#123;
+  "name": "{ profile.Name }",
+  "role": "Developer & Engineer",
+  "focus": "{ profile.About.CurrentFocus }",
+  "status": "Always learning"
+&#125;</code></pre>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+}
+
+templ TechStackSection(stack models.TechStack) {
+	<section class="section tech-stack">
+		<div class="section__container">
+			<div class="section__header">
+				<span class="section__label">Technologies</span>
+				<h2 class="section__title">Tech Stack</h2>
+				<p class="section__subtitle">Tools and technologies used across projects and experiments.</p>
+			</div>
+			<div class="tech-stack__grid">
+				@TechCategory("Programming Languages", stack.ProgrammingLanguages, "lang")
+				@TechCategory("Backend Development", stack.Backend, "backend")
+				@TechCategory("Frontend Development", stack.Frontend, "frontend")
+				@TechCategory("Artificial Intelligence", stack.AI, "ai")
+				@TechCategory("Networking & Infrastructure", stack.Networking, "network")
+				@TechCategory("Tools & Platforms", stack.Tools, "tools")
+			</div>
+		</div>
+	</section>
+}
+
+templ TechCategory(title string, items []string, iconClass string) {
+	<div class={ "tech-category", "tech-category--" + iconClass }>
+		<div class="tech-category__header">
+			<span class={ "tech-category__icon", "tech-category__icon--" + iconClass }></span>
+			<h3 class="tech-category__title">{ title }</h3>
+		</div>
+		<div class="tech-category__items">
+			for _, item := range items {
+				<span class="tech-category__item">{ item }</span>
+			}
+		</div>
+	</div>
+}
+
+templ LabPreview(areas []models.LabArea) {
+	<section class="section lab-preview">
+		<div class="section__container">
+			<div class="section__header">
+				<span class="section__label">Exploration</span>
+				<h2 class="section__title">Digital Laboratory</h2>
+				<p class="section__subtitle">Areas of active research, experimentation, and hands-on exploration.</p>
+			</div>
+			<div class="lab-preview__grid">
+				for _, area := range areas {
+					<div class={ "lab-card", "lab-card--" + area.Icon }>
+						<div class="lab-card__indicator"></div>
+						<div class="lab-card__content">
+							<h3 class="lab-card__title">{ area.Title }</h3>
+							<p class="lab-card__description">{ area.Description }</p>
+						</div>
+						<a href={ templ.SafeURL("/lab#" + area.Slug) } class="lab-card__link">
+							Explore →
+						</a>
+					</div>
+				}
+			</div>
+			<div class="section__action">
+				<a href="/lab" class="btn btn--outline">Enter the Lab</a>
+			</div>
+		</div>
+	</section>
+}
+
+templ JournalPreview(entries []models.JournalEntry) {
+	<section class="section journal-preview">
+		<div class="section__container">
+			<div class="section__header">
+				<span class="section__label">Writing</span>
+				<h2 class="section__title">Journal</h2>
+				<p class="section__subtitle">Articles, experiment notes, and research documentation.</p>
+			</div>
+			<div class="journal-preview__grid">
+				for _, entry := range entries {
+					<article class="journal-card">
+						if entry.IsSample {
+							<span class="journal-card__sample-badge">Sample</span>
+						}
+						<div class="journal-card__meta">
+							<span class="journal-card__category">{ entry.Category }</span>
+							<span class="journal-card__date">{ entry.Date }</span>
+						</div>
+						<h3 class="journal-card__title">
+							<a href={ templ.SafeURL("/journal#" + entry.Slug) }>{ entry.Title }</a>
+						</h3>
+						<p class="journal-card__summary">{ entry.Summary }</p>
+					</article>
+				}
+			</div>
+			<div class="section__action">
+				<a href="/journal" class="btn btn--outline">View All Entries</a>
+			</div>
+		</div>
+	</section>
+}
+
+templ ProjectFilter(categories []string, active string) {
+	<div class="project-filter" id="project-filter">
+		<button
+			class={ "project-filter__btn", templ.KV("project-filter__btn--active", active == "" || active == "all") }
+			hx-get="/projects?category=all"
+			hx-target="#project-grid"
+			hx-swap="outerHTML"
+			hx-push-url="false"
+		>
+			All
+		</button>
+		for _, cat := range categories {
+			<button
+				class={ "project-filter__btn", templ.KV("project-filter__btn--active", active == cat) }
+				hx-get={ "/projects?category=" + cat }
+				hx-target="#project-grid"
+				hx-swap="outerHTML"
+				hx-push-url="false"
+			>
+				{ cat }
+			</button>
+		}
+	</div>
+}

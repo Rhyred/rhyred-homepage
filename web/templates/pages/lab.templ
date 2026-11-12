@@ -1,0 +1,66 @@
+package pages
+
+import (
+	"github.com/Rhyred/rhyred-homepage/internal/models"
+	"github.com/Rhyred/rhyred-homepage/web/templates/layouts"
+)
+
+templ Lab(areas []models.LabArea) {
+	@layouts.Base("Digital Laboratory") {
+		<section class="page-hero">
+			<div class="page-hero__container">
+				<span class="section__label">Exploration</span>
+				<h1 class="page-hero__title">Digital Laboratory</h1>
+				<p class="page-hero__subtitle">A space for research, experimentation, and hands-on technology exploration.</p>
+			</div>
+		</section>
+
+		<section class="section lab-section">
+			<div class="section__container">
+				<div class="lab-section__terminal">
+					<div class="terminal terminal--wide">
+						<div class="terminal__header">
+							<span class="terminal__dot terminal__dot--red"></span>
+							<span class="terminal__dot terminal__dot--yellow"></span>
+							<span class="terminal__dot terminal__dot--green"></span>
+							<span class="terminal__title">lab@rhyred:~/experiments</span>
+						</div>
+						<div class="terminal__body">
+							<div class="terminal__line">
+								<span class="terminal__prompt">lab@rhyred:~$</span>
+								<span class="terminal__command"> ls -la ./research/</span>
+							</div>
+							<div class="terminal__output terminal__output--table">
+								<p>drwxr-xr-x  homelab-infrastructure/</p>
+								<p>drwxr-xr-x  computer-vision/</p>
+								<p>drwxr-xr-x  artificial-intelligence/</p>
+								<p>drwxr-xr-x  networking/</p>
+								<p>drwxr-xr-x  hardware-iot/</p>
+							</div>
+							<div class="terminal__line">
+								<span class="terminal__prompt">lab@rhyred:~$</span>
+								<span class="terminal__cursor">_</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="lab-section__areas">
+					for _, area := range areas {
+						<div class={ "lab-area", "lab-area--" + area.Icon } id={ area.Slug }>
+							<div class="lab-area__header">
+								<div class="lab-area__indicator"></div>
+								<h2 class="lab-area__title">{ area.Title }</h2>
+							</div>
+							<p class="lab-area__description">{ area.Description }</p>
+							<div class="lab-area__footer">
+								<span class="lab-area__status">Exploring</span>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</section>
+	}
+}
+

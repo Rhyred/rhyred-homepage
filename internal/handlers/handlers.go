@@ -116,4 +116,3 @@ func (h *Handler) Status(w http.ResponseWriter, r *http.Request) {
 		"time":    time.Now().UTC().Format(time.RFC3339),
 	})
 }
-

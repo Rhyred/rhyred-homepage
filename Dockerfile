@@ -1,5 +1,6 @@
 # Build stage
-FROM golang:1.27-alpine AS builder
+ARG GO_VERSION=alpine
+FROM golang:${GO_VERSION} AS builder
 
 WORKDIR /app
 
@@ -16,19 +17,26 @@ COPY . .
 # Generate templ files
 RUN templ generate
 
-# Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /server ./cmd/server
+# Build binary
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /server ./cmd/server
 
 # Runtime stage
-FROM alpine:3.19
+FROM alpine:3.20
 
 WORKDIR /app
 
-COPY --from=builder /server .
-COPY --from=builder /app/web/static ./web/static
-COPY --from=builder /app/web/data ./web/data
+# Run as non-root user
+RUN adduser -D -u 10001 rhyred
+
+COPY --from=builder --chown=rhyred:rhyred /server .
+COPY --from=builder --chown=rhyred:rhyred /app/web/static ./web/static
+COPY --from=builder --chown=rhyred:rhyred /app/web/data ./web/data
+
+USER rhyred:rhyred
 
 EXPOSE 8080
 
-ENTRYPOINT ["./server"]
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/health || exit 1
 
+ENTRYPOINT ["./server"]

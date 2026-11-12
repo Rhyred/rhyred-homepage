@@ -183,4 +183,3 @@ func TestJournal(t *testing.T) {
 		t.Errorf("expected status 200, got %d", w.Code)
 	}
 }
-

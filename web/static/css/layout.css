@@ -142,6 +142,14 @@
   align-items: start;
 }
 
+.about-preview__grid > *,
+.about-detail__grid > *,
+.project-detail__grid > *,
+.project-grid > *,
+.tech-stack__grid > * {
+  min-width: 0;
+}
+
 .tech-stack__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

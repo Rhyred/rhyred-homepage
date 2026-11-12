@@ -3,6 +3,7 @@ package services
 import (
 	"encoding/json"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 
@@ -40,7 +41,7 @@ func (ds *DataService) Load() error {
 }
 
 func (ds *DataService) loadProjects() error {
-	data, err := os.ReadFile(ds.dataDir + "/projects.json")
+	data, err := os.ReadFile(filepath.Join(ds.dataDir, "projects.json"))
 	if err != nil {
 		return err
 	}
@@ -48,7 +49,7 @@ func (ds *DataService) loadProjects() error {
 }
 
 func (ds *DataService) loadProfile() error {
-	data, err := os.ReadFile(ds.dataDir + "/profile.json")
+	data, err := os.ReadFile(filepath.Join(ds.dataDir, "profile.json"))
 	if err != nil {
 		return err
 	}
@@ -128,4 +129,3 @@ func (ds *DataService) GetCategories() []string {
 	}
 	return categories
 }
-

@@ -1,0 +1,39 @@
+[
+  {
+    "slug": "satset",
+    "title": "Satset",
+    "category": "Web Application",
+    "description": "Digital platform and web application development.",
+    "tags": ["Go", "Web", "Full-Stack"],
+    "status": "In Development",
+    "featured": true
+  },
+  {
+    "slug": "nicegas-bio-cng",
+    "title": "NICEGAS — Bio-CNG Itenas",
+    "category": "AI / IoT / Monitoring",
+    "description": "Intelligent monitoring and automation concept for Bio-CNG infrastructure.",
+    "tags": ["Python", "IoT", "AI", "Monitoring"],
+    "status": "Research",
+    "featured": true
+  },
+  {
+    "slug": "coresight",
+    "title": "CoreSight",
+    "category": "Networking / Artificial Intelligence",
+    "description": "Network monitoring and AI-based DDoS anomaly detection research.",
+    "tags": ["Python", "Networking", "Machine Learning", "Security"],
+    "status": "Research",
+    "featured": true
+  },
+  {
+    "slug": "smart-triage-gate",
+    "title": "Smart Triage Gate",
+    "category": "IoT / Computer Vision",
+    "description": "Raspberry Pi-based initial patient screening concept.",
+    "tags": ["Raspberry Pi", "Computer Vision", "Python", "IoT"],
+    "status": "Concept",
+    "featured": true
+  }
+]
+

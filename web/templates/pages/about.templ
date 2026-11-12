@@ -1,0 +1,61 @@
+package pages
+
+import (
+	"github.com/Rhyred/rhyred-homepage/internal/models"
+	"github.com/Rhyred/rhyred-homepage/web/templates/layouts"
+	"github.com/Rhyred/rhyred-homepage/web/templates/components"
+)
+
+templ About(profile models.Profile) {
+	@layouts.Base("About") {
+		<section class="page-hero">
+			<div class="page-hero__container">
+				<span class="section__label">About</span>
+				<h1 class="page-hero__title">{ profile.About.Headline }</h1>
+				<p class="page-hero__subtitle">{ profile.About.Summary }</p>
+			</div>
+		</section>
+
+		<section class="section about-detail">
+			<div class="section__container">
+				<div class="about-detail__grid">
+					<div class="about-detail__main">
+						<div class="about-detail__block">
+							<h2 class="about-detail__heading">Background</h2>
+							<p class="about-detail__text">{ profile.About.Background }</p>
+						</div>
+						<div class="about-detail__block">
+							<h2 class="about-detail__heading">Current Focus</h2>
+							<p class="about-detail__text">{ profile.About.CurrentFocus }</p>
+						</div>
+					</div>
+					<div class="about-detail__sidebar">
+						<div class="terminal terminal--compact">
+							<div class="terminal__header">
+								<span class="terminal__dot terminal__dot--red"></span>
+								<span class="terminal__dot terminal__dot--yellow"></span>
+								<span class="terminal__dot terminal__dot--green"></span>
+								<span class="terminal__title">about.json</span>
+							</div>
+							<div class="terminal__body terminal__body--code">
+								<pre><code>&#123;
+  "name": "{ profile.Name }",
+  "focus": [
+    "Software Engineering",
+    "Artificial Intelligence",
+    "Networking",
+    "IoT"
+  ],
+  "status": "Always building"
+&#125;</code></pre>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		@components.TechStackSection(profile.TechStack)
+	}
+}
+

@@ -1,0 +1,73 @@
+package pages
+
+import (
+	"github.com/Rhyred/rhyred-homepage/internal/models"
+	"github.com/Rhyred/rhyred-homepage/web/templates/layouts"
+	"github.com/Rhyred/rhyred-homepage/web/templates/components"
+)
+
+templ Projects(projects []models.Project, categories []string, activeCategory string) {
+	@layouts.Base("Projects") {
+		<section class="page-hero">
+			<div class="page-hero__container">
+				<span class="section__label">Portfolio</span>
+				<h1 class="page-hero__title">Projects</h1>
+				<p class="page-hero__subtitle">A collection of projects spanning software engineering, AI, networking, and IoT.</p>
+			</div>
+		</section>
+
+		<section class="section projects-section">
+			<div class="section__container">
+				@components.ProjectFilter(categories, activeCategory)
+				@components.ProjectGrid(projects)
+			</div>
+		</section>
+	}
+}
+
+templ ProjectDetail(project models.Project) {
+	@layouts.Base(project.Title) {
+		<section class="page-hero">
+			<div class="page-hero__container">
+				<a href="/projects" class="page-hero__back">← Back to Projects</a>
+				<span class="section__label">{ project.Category }</span>
+				<h1 class="page-hero__title">{ project.Title }</h1>
+				<span class={ "project-card__status", components.StatusClass(project.Status) }>{ project.Status }</span>
+			</div>
+		</section>
+
+		<section class="section project-detail">
+			<div class="section__container">
+				<div class="project-detail__grid">
+					<div class="project-detail__main">
+						<h2 class="project-detail__heading">Overview</h2>
+						<p class="project-detail__description">{ project.Description }</p>
+						<p class="project-detail__note">Detailed project documentation is being developed. Check back for updates.</p>
+					</div>
+					<div class="project-detail__sidebar">
+						<div class="project-detail__meta">
+							<h3 class="project-detail__meta-title">Project Info</h3>
+							<div class="project-detail__meta-item">
+								<span class="project-detail__meta-label">Category</span>
+								<span class="project-detail__meta-value">{ project.Category }</span>
+							</div>
+							<div class="project-detail__meta-item">
+								<span class="project-detail__meta-label">Status</span>
+								<span class="project-detail__meta-value">{ project.Status }</span>
+							</div>
+							<div class="project-detail__meta-item">
+								<span class="project-detail__meta-label">Technologies</span>
+								<div class="project-card__tags">
+									for _, tag := range project.Tags {
+										<span class="project-card__tag">{ tag }</span>
+									}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	}
+}
+

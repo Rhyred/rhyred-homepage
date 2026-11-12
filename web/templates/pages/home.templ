@@ -1,0 +1,19 @@
+package pages
+
+import (
+	"github.com/Rhyred/rhyred-homepage/internal/models"
+	"github.com/Rhyred/rhyred-homepage/web/templates/layouts"
+	"github.com/Rhyred/rhyred-homepage/web/templates/components"
+)
+
+templ Home(profile models.Profile, projects []models.Project) {
+	@layouts.Base("Home") {
+		@components.Hero(profile)
+		@components.FeaturedProjects(projects)
+		@components.AboutPreview(profile)
+		@components.TechStackSection(profile.TechStack)
+		@components.LabPreview(profile.LabAreas)
+		@components.JournalPreview(profile.Journal)
+	}
+}
+

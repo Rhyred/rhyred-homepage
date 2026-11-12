@@ -1,0 +1,87 @@
+{
+  "name": "RHYRED",
+  "tagline": "Building ideas into digital reality.",
+  "description": "Exploring software engineering, artificial intelligence, networking, and the technology behind tomorrow.",
+  "roles": ["Developer", "Engineer", "Student"],
+  "about": {
+    "headline": "Curiosity drives innovation.",
+    "summary": "A developer passionate about building technology through experimentation, software development, research, and infrastructure. Driven by the desire to understand how systems work and to create tools that make a difference.",
+    "current_focus": "Software Engineering, Artificial Intelligence, Networking, and IoT",
+    "background": "Engineering student exploring the intersection of software, hardware, and intelligent systems."
+  },
+  "contact": {
+    "github": "https://github.com/Rhyred",
+    "email": "your-email@example.com",
+    "social": {
+      "linkedin": "https://linkedin.com/in/your-profile",
+      "twitter": "https://twitter.com/your-handle"
+    }
+  },
+  "tech_stack": {
+    "programming_languages": ["Go", "Python", "JavaScript", "C++"],
+    "backend": ["Go (net/http)", "REST API", "gRPC"],
+    "frontend": ["HTML", "CSS", "HTMX", "Templ"],
+    "ai": ["TensorFlow", "PyTorch", "OpenCV", "Scikit-learn"],
+    "networking": ["Linux Networking", "Wireshark", "Docker", "Proxmox"],
+    "tools": ["Git", "VS Code", "Docker", "Linux", "Raspberry Pi"]
+  },
+  "lab_areas": [
+    {
+      "slug": "homelab",
+      "title": "Homelab & Infrastructure",
+      "description": "Self-hosted services, virtualization, and network infrastructure experiments.",
+      "icon": "server"
+    },
+    {
+      "slug": "computer-vision",
+      "title": "Computer Vision",
+      "description": "Image processing, object detection, and visual recognition projects.",
+      "icon": "eye"
+    },
+    {
+      "slug": "artificial-intelligence",
+      "title": "Artificial Intelligence",
+      "description": "Machine learning models, neural networks, and intelligent system research.",
+      "icon": "brain"
+    },
+    {
+      "slug": "networking",
+      "title": "Networking",
+      "description": "Network analysis, security monitoring, and protocol research.",
+      "icon": "network"
+    },
+    {
+      "slug": "hardware-iot",
+      "title": "Hardware & IoT",
+      "description": "Microcontrollers, sensors, embedded systems, and IoT prototyping.",
+      "icon": "chip"
+    }
+  ],
+  "journal_entries": [
+    {
+      "slug": "getting-started-with-go-templ",
+      "title": "Getting Started with Go and Templ",
+      "date": "2026-11-01",
+      "category": "Development",
+      "summary": "Exploring the Templ templating engine for Go web development.",
+      "is_sample": true
+    },
+    {
+      "slug": "homelab-proxmox-setup",
+      "title": "Homelab: Proxmox Setup Notes",
+      "date": "2026-10-15",
+      "category": "Infrastructure",
+      "summary": "Documenting the initial setup and configuration of a Proxmox homelab environment.",
+      "is_sample": true
+    },
+    {
+      "slug": "ddos-detection-research",
+      "title": "DDoS Detection with Machine Learning",
+      "date": "2026-09-20",
+      "category": "Research",
+      "summary": "Research notes on applying machine learning techniques for network anomaly detection.",
+      "is_sample": true
+    }
+  ]
+}
+
